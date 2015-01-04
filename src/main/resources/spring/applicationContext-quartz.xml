@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="taskExecutor" class="java.util.concurrent.ThreadPoolExecutor">
+        <constructor-arg value="1"/>
+        <constructor-arg value="10"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="SECONDS"/>
+        <constructor-arg>
+            <bean class="java.util.concurrent.LinkedBlockingQueue"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="triggers" class="java.util.ArrayList">
+        <constructor-arg>
+            <bean class="com.zhiyi.schedule.quartz.factory.TriggerFactoryBean">
+                <property name="name" value="商家订单月销售" />
+                <property name="jobClass" value="com.zhiyi.schedule.job.SellCountForStoreJob" />
+                <property name="threadCount" value="10" />
+                <property name="allowRetry" value="true" />
+                <property name="mainTableName" value="CALL_SELL_COUNT_LOG" />
+                <property name="triggerRule">
+                    <bean class="com.zhiyi.schedule.quartz.factory.CronTriggerRule">
+                        <property name="cronExpression" value="0 0 0 * * ?"></property>
+                    </bean>
+                </property>
+            </bean>
+        </constructor-arg>
+    </bean>
+</beans>

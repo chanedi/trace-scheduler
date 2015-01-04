@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com.zhiyi.schedule"/>
+    <!--&lt;!&ndash;<bean name="/orderItemProxy" class="org.springframework.remoting.caucho.HessianServiceExporter">&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="serviceInterface" value="com.zhiyi.deliveryinterface.interfaces.OrderItemInterface"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</bean>&ndash;&gt;-->
+    <!--<bean id="cancelPaymentOrderProxy" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="${hessian.remote.url}/cancelPaymentOrderProxy"/>-->
+        <!--<property name="serviceInterface" value="com.zhiyi.deliveryinterface.interfaces.schedule.CancelPaymentOrderInterface"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="changeDeliveryPersonStatusProxy" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="${hessian.remote.url}/changeDeliveryPersonStatusProxy"/>-->
+        <!--<property name="serviceInterface" value="com.zhiyi.deliveryinterface.interfaces.schedule.ChangeDeliveryPersonStatusInterface"/>-->
+    <!--</bean>-->
+
+    <bean id="calSellCountProxy" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${hessian.remote.url}/calSellCountProxy"/>
+        <property name="serviceInterface" value="com.zhiyi.deliveryinterface.interfaces.SellCountInterface"/>
+    </bean>
+    <!--<bean id="changeBusinessTimeProxy" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="${hessian.remote.url}/changeBusinessTimeProxy"/>-->
+        <!--<property name="serviceInterface" value="com.zhiyi.deliveryinterface.interfaces.ChangeBusinessTimeInterface"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="wuyonSettlementProxy" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="${hessian.remote.url}/wuyouSettlementProxy"/>-->
+        <!--<property name="serviceInterface" value="com.zhiyi.deliveryinterface.interfaces.WuyouSettlementInterface"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="orderToAlertProxy" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="${hessian.remote.url}/orderToAlertProxy"/>-->
+        <!--<property name="serviceInterface" value="com.zhiyi.deliveryinterface.interfaces.OrderToAlertInterface"/>-->
+    <!--</bean>-->
+
+
+</beans>

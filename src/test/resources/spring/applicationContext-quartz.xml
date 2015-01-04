@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="taskExecutor" class="java.util.concurrent.ThreadPoolExecutor">
+        <constructor-arg value="1"/>
+        <constructor-arg value="10"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="SECONDS"/>
+        <constructor-arg>
+            <bean class="java.util.concurrent.LinkedBlockingQueue"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="triggers" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <bean class="com.zhiyi.schedule.quartz.factory.TriggerFactoryBean">
+                    <property name="jobClass" value="com.zhiyi.schedule.test.CountExceptionJob" />
+                    <property name="mainTableName" value="TEST" />
+                    <property name="triggerRule">
+                        <bean class="com.zhiyi.schedule.quartz.factory.SimpleTriggerRule">
+                            <property name="repeatInterval" value="1000"></property>
+                            <property name="repeatCount" value="0"></property>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="com.zhiyi.schedule.quartz.factory.TriggerFactoryBean">
+                    <property name="jobClass" value="com.zhiyi.schedule.test.RandomFailedJob" />
+                    <property name="allowRetry" value="false" />
+                    <property name="mainTableName" value="TEST" />
+                    <property name="triggerRule">
+                        <bean class="com.zhiyi.schedule.quartz.factory.SimpleTriggerRule">
+                            <property name="repeatInterval" value="1000"></property>
+                            <property name="repeatCount" value="0"></property>
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+</beans>
